@@ -817,6 +817,9 @@ class BaseTemplate:
             set_TI.color = self.RGB_BLACK
             artist_layer.textItem.color = self.RGB_BLACK
 
+        # Fill Artist
+        psd.replace_text(artist_layer, "Artist", self.layout.artist)
+
         # Disable Set layer if Artist Only mode is enabled
         if CFG.collector_mode == CollectorMode.ArtistOnly:
             set_layer.visible = False
@@ -826,10 +829,10 @@ class BaseTemplate:
         if self.is_collector_promo:
             psd.replace_text(set_layer, "•", MagicIcons.COLLECTOR_STAR)
 
-        # Fill language, artist, and set
+        # Fill language and set
         if self.layout.lang != "en":
             psd.replace_text(set_layer, "EN", self.layout.lang.upper())
-        psd.replace_text(artist_layer, "Artist", self.layout.artist)
+
         set_TI.contents = self.layout.set + set_TI.contents
 
     def collector_info_authentic(self) -> None:
